@@ -1,0 +1,974 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PORTFOLIO | Sympa L.</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='20' fill='%231a2f8a'/><text y='.9em' font-size='60' x='50%' text-anchor='middle' fill='white' font-family='serif'>S</text></svg>" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;0,900;1,400;1,700&family=Inter:wght@300;400;500;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --navy:        #0f1f6b;
+      --navy-dark:   #091454;
+      --navy-deep:   #07103e;
+      --navy-mid:    #1a2f8a;
+      --navy-input:  #1e2f85;
+      --accent-blue: #7098e8;
+      --white:       #ffffff;
+      --white-60:    rgba(255,255,255,0.6);
+      --white-40:    rgba(255,255,255,0.4);
+      --white-20:    rgba(255,255,255,0.2);
+      --white-10:    rgba(255,255,255,0.1);
+      --white-06:    rgba(255,255,255,0.06);
+      --green:       #3dd68c;
+      --green-bg:    rgba(61,214,140,0.15);
+      --orange:      #ff6b00;
+      --radius:      14px;
+      --radius-lg:   20px;
+    }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--navy-dark);
+      color: var(--white);
+      overflow-x: hidden;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 200;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 3rem; height: 64px;
+      background: rgba(9,20,84,0.93);
+      backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--white-10);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem; font-weight: 700;
+      color: var(--white); text-decoration: none;
+    }
+    .nav-links { display: flex; list-style: none; }
+    .nav-links a {
+      display: block; padding: 0 1rem;
+      color: var(--white-60); text-decoration: none;
+      font-size: 0.76rem; font-weight: 500;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      transition: color .2s; line-height: 64px;
+    }
+    .nav-links a:hover,
+    .nav-links a.active { color: var(--white); }
+    .burger {
+      display: none; flex-direction: column; gap: 5px;
+      cursor: pointer; padding: 6px; background: none; border: none;
+    }
+    .burger span { display: block; width: 22px; height: 2px; background: var(--white); border-radius: 2px; }
+
+    /* ── SHARED ── */
+    section { padding-top: 64px; }
+    .section-wrap { padding: 4rem 5rem; }
+    .section-eyebrow {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--white-40); margin-bottom: 0.7rem;
+    }
+    .section-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1.5px; background: var(--white-30,rgba(255,255,255,0.3)); }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; line-height: 1.1;
+      color: var(--white); margin-bottom: 0.5rem;
+    }
+    .section-title em { font-style: italic; color: var(--accent-blue); }
+    .section-desc { font-size: 0.9rem; color: var(--white-60); margin-bottom: 2.5rem; }
+
+    /* ═══════════════════════════════════
+       FOND GLOBAL UNIFIÉ
+    ═══════════════════════════════════ */
+    body { background: #0c1870; }
+    #accueil, #apropos, #experiences, #realisations, #etudes, #contact {
+      background: linear-gradient(160deg, #0c1870 0%, #091454 100%);
+    }
+    #accueil {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 64px 5rem 0;
+    }
+    .accueil-inner {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 3.5rem; width: 100%; max-width: 1200px; align-items: center;
+      padding: 4rem 0; margin: 0 auto;
+    }
+    /* LEFT */
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 0.7rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--white-40); margin-bottom: 1.4rem;
+    }
+    .hero-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1.5px; background: var(--white-30,rgba(255,255,255,0.3)); }
+    .hero-name {
+      font-family: 'Playfair Display', serif;
+      font-weight: 900; line-height: 0.95; margin-bottom: 1.2rem;
+    }
+    .hero-name .first {
+      font-size: clamp(3.8rem, 6.5vw, 6rem);
+      display: block; font-style: italic; color: var(--white);
+    }
+    .hero-name .last {
+      font-size: clamp(3.8rem, 6.5vw, 6rem);
+      display: block; font-style: normal; color: var(--accent-blue);
+    }
+    .hero-sub1 { font-size: 0.9rem; color: var(--white-60); margin-bottom: 0.4rem; }
+    .hero-sub2 { font-size: 0.9rem; color: var(--white-60); margin-bottom: 2rem; }
+    .hero-tags { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-bottom: 2.2rem; }
+    .hero-tag {
+      padding: 0.45rem 1.1rem;
+      border: 1px solid var(--white-20); border-radius: 100px;
+      font-size: 0.8rem; color: var(--white-60);
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.8rem; background: #1e40af;
+      border-radius: 8px; font-size: 0.82rem; font-weight: 600;
+      color: var(--white); text-decoration: none;
+      letter-spacing: 0.04em; text-transform: uppercase; transition: background .2s;
+    }
+    .btn-primary:hover { background: #2563eb; }
+    /* RIGHT – info card */
+    .hero-card {
+      background: var(--white-06);
+      border: 1px solid var(--white-10);
+      border-radius: var(--radius-lg); padding: 1.6rem;
+      backdrop-filter: blur(8px);
+    }
+    .hcr {
+      display: flex; justify-content: space-between; align-items: flex-start;
+      padding: 0.9rem 0; border-bottom: 1px solid var(--white-10);
+    }
+    .hcr:first-child { padding-top: 0.2rem; }
+    .hcr:last-of-type { border-bottom: none; padding-bottom: 0.2rem; }
+    .hcr-label { font-size: 0.7rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--white-40); }
+    .hcr-val { font-size: 0.88rem; color: var(--white); font-weight: 600; text-align: right; }
+    .dispo-badge {
+      margin-top: 1rem; display: flex; align-items: center; gap: 0.6rem;
+      padding: 0.7rem 1rem; background: var(--green-bg);
+      border: 1px solid rgba(61,214,140,0.25); border-radius: 8px;
+      font-size: 0.85rem; color: var(--green); font-weight: 500;
+    }
+    .dispo-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(61,214,140,0.25); flex-shrink: 0; }
+
+    /* ═══════════════════════════════════
+       À PROPOS
+    ═══════════════════════════════════ */
+    #apropos { }
+    /* À PROPOS – layout maquette : formation gauche, 4 cartes droite */
+    .ap-layout { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; align-items: start; }
+    .ap-left-col { display: flex; flex-direction: column; gap: 1rem; }
+    .ap-right { display: flex; flex-direction: column; gap: 1rem; }
+    .ap-formation { }
+    .ap-bio { font-size: 0.95rem; color: var(--white-60); line-height: 1.75; padding: 0 0 0.4rem; }
+    /* legacy grid – kept for fallback */
+    .ap-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.4rem; }
+    /* comp pills – flex wrap like maquette */
+    .comp-tags-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .ap-card {
+      background: var(--white-06); border: 1px solid var(--white-10);
+      border-radius: var(--radius); padding: 1.7rem;
+    }
+    .ap-card-lbl { font-family: 'Space Mono', monospace; font-size: 0.62rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--white-40); margin-bottom: 1.1rem; }
+    .f-item { margin-bottom: 1.2rem; padding-bottom: 1.2rem; border-bottom: 1px solid var(--white-10); }
+    .f-item:last-child { margin-bottom: 0; padding-bottom: 0; border-bottom: none; }
+    .f-school { font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-blue); font-weight: 700; margin-bottom: 0.25rem; }
+    .f-degree { font-size: 0.9rem; font-weight: 600; color: var(--white); margin-bottom: 0.15rem; }
+    .f-sub { font-size: 0.78rem; color: var(--white-60); }
+    .comp-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.45rem; }
+    .comp-pill { padding: 0.52rem 0.8rem; background: var(--white-10); border-radius: 8px; font-size: 0.8rem; color: var(--white-60); }
+    .outils-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; }
+    .outil-tag { padding: 0.32rem 0.75rem; background: var(--white-10); border-radius: 6px; font-size: 0.76rem; color: var(--white-60); }
+    .lang-row { display: flex; justify-content: space-between; align-items: center; padding: 0.5rem 0; border-bottom: 1px solid var(--white-10); }
+    .lang-row:last-child { border-bottom: none; }
+    .lang-name { font-size: 0.88rem; color: var(--white); font-weight: 500; }
+    .lang-lvl { font-size: 0.72rem; color: var(--white-40); font-family: 'Space Mono', monospace; }
+    .int-wrap { display: flex; flex-wrap: wrap; gap: 0.45rem; margin-top: 0.8rem; }
+    .int-pill { padding: 0.32rem 0.75rem; background: rgba(112,152,232,0.15); border: 1px solid rgba(112,152,232,0.2); border-radius: 6px; font-size: 0.76rem; color: var(--accent-blue); }
+
+    /* ═══════════════════════════════════
+       EXPÉRIENCES
+    ═══════════════════════════════════ */
+    #experiences { }
+    .exp-list { display: flex; flex-direction: column; gap: 1.1rem; }
+    .exp-card {
+      background: var(--white-06); border: 1px solid var(--white-10);
+      border-left: 3px solid var(--accent-blue);
+      border-radius: var(--radius); padding: 1.7rem 2rem;
+      transition: background .2s;
+    }
+    .exp-card:hover { background: var(--white-10); }
+    .exp-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.5rem; flex-wrap: wrap; gap: 0.4rem; }
+    .exp-co { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); font-weight: 700; font-family: 'Space Mono', monospace; margin-bottom: 0.2rem; }
+    .exp-role { font-family: 'Playfair Display', serif; font-size: 1.1rem; font-weight: 600; color: var(--white); }
+    .exp-period { font-family: 'Space Mono', monospace; font-size: 0.68rem; color: var(--white-40); background: var(--white-10); padding: 0.28rem 0.65rem; border-radius: 100px; white-space: nowrap; }
+    .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.7rem; }
+    .exp-tag { font-size: 0.68rem; font-weight: 600; letter-spacing: 0.07em; text-transform: uppercase; color: var(--accent-blue); background: rgba(112,152,232,0.12); padding: 0.18rem 0.55rem; border-radius: 4px; }
+    .exp-desc { font-size: 0.86rem; color: var(--white-60); line-height: 1.65; }
+    .btn-rapport {
+      display: inline-flex; align-items: center; gap: 0.45rem;
+      padding: 0.6rem 1.3rem; border: 1.5px solid var(--accent-blue);
+      border-radius: 8px; font-size: 0.78rem; font-weight: 600;
+      color: var(--accent-blue); text-decoration: none; margin-top: 1.2rem;
+      transition: background .2s, color .2s;
+    }
+    .btn-rapport:hover { background: var(--accent-blue); color: var(--white); }
+
+    /* ═══════════════════════════════════
+       RÉALISATIONS
+    ═══════════════════════════════════ */
+    #realisations { }
+    .real-block { margin-bottom: 3.5rem; }
+    .real-block-title { font-family: 'Playfair Display', serif; font-size: 1.45rem; font-weight: 700; color: var(--white); margin-bottom: 0.35rem; }
+    .real-block-sub { font-size: 0.86rem; color: var(--white-60); margin-bottom: 1.5rem; line-height: 1.65; }
+
+
+    /* ── VIDEO PLAYER – approche robuste ── */
+    /* Conteneur 9:16 */
+    .vp {
+      position: relative; width: 100%;
+      padding-bottom: 177.78%; /* 16/9 × 100 */
+      background: #000; border-radius: var(--radius); overflow: hidden;
+    }
+    /* Conteneur 16:9 (interview SNCF) */
+    .vp-16-9 {
+      position: relative; width: 100%;
+      padding-bottom: 56.25%;
+      background: #000; border-radius: var(--radius) var(--radius) 0 0; overflow: hidden;
+    }
+    /* La vidéo remplit toujours son conteneur */
+    .vp video,
+    .vp-16-9 video {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      object-fit: cover; display: block;
+    }
+    /* Overlay play */
+    .vp-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.28); cursor: pointer; transition: background .2s;
+    }
+    .vp-overlay:hover { background: rgba(0,0,0,0.12); }
+    .play-btn {
+      width: 54px; height: 54px; border-radius: 50%;
+      background: rgba(255,255,255,0.93);
+      display: flex; align-items: center; justify-content: center;
+      transition: transform .18s; flex-shrink: 0;
+    }
+    .vp-overlay:hover .play-btn { transform: scale(1.1); }
+    .play-btn svg { width: 20px; height: 20px; margin-left: 4px; }
+
+    /* MIMONISA – pas de padding-bottom supplémentaire, .vp gère tout */
+    .mim-wrap { display: flex; justify-content: center; gap: 1.5rem; }
+    .mim-card { width: 260px; flex-shrink: 0; }
+    .mim-info { padding: 0.9rem 0; }
+    .vid-brand { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.22rem; }
+    .vid-title { font-size: 0.86rem; font-weight: 600; color: var(--white); margin-bottom: 0.65rem; }
+    .btn-ig { display: inline-flex; align-items: center; gap: 0.38rem; padding: 0.36rem 0.75rem; background: linear-gradient(135deg,#f09433,#e6683c,#dc2743,#cc2366,#bc1888); border-radius: 6px; font-size: 0.7rem; font-weight: 600; color: var(--white); text-decoration: none; transition: opacity .2s; }
+    .btn-ig:hover { opacity: 0.85; }
+    .btn-yt { display: inline-flex; align-items: center; gap: 0.38rem; padding: 0.36rem 0.75rem; background: #ff0000; border-radius: 6px; font-size: 0.7rem; font-weight: 600; color: var(--white); text-decoration: none; transition: opacity .2s; }
+    .btn-yt:hover { opacity: 0.85; }
+    .btn-linktree { display: inline-flex; align-items: center; gap: 0.5rem; padding: 0.58rem 1.3rem; background: #39e09b; color: #111; border-radius: 8px; font-size: 0.8rem; font-weight: 700; text-decoration: none; transition: opacity .2s; }
+    .btn-linktree:hover { opacity: 0.85; }
+
+    /* ORANGE phone grid – même taille que Mimonisa (260px/carte) */
+    .phone-grid { display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; }
+    .phone-card { background: #0a0e2a; border-radius: 20px; overflow: hidden; border: 2.5px solid rgba(255,255,255,0.06); box-shadow: 0 8px 28px rgba(0,0,0,0.4); width: 260px; flex-shrink: 0; }
+    /* Conteneur 9:16 pour les phone cards */
+    .phone-vid {
+      position: relative; width: 100%;
+      padding-bottom: 177.78%;
+      background: #000; overflow: hidden;
+    }
+    .phone-vid video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+    .phone-overlay {
+      position: absolute; inset: 0; z-index: 2;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(0,0,0,0.3); cursor: pointer; transition: background .2s;
+    }
+    .phone-overlay:hover { background: rgba(0,0,0,0.12); }
+    .phone-label { position: absolute; bottom: 0; left: 0; right: 0; padding: 0.6rem; background: linear-gradient(to top,rgba(0,0,0,0.85) 0%,transparent 100%); pointer-events: none; z-index: 1; }
+    .tuto-badge { display: inline-block; background: var(--orange); color: var(--white); font-size: 0.7rem; font-weight: 800; padding: 0.1rem 0.38rem; margin-bottom: 0.22rem; }
+    .phone-title { font-size: 0.74rem; font-weight: 700; color: var(--white); line-height: 1.3; }
+    .phone-bottom { padding: 0.55rem 0.7rem; display: flex; align-items: center; justify-content: space-between; }
+    .phone-name { font-size: 0.6rem; color: var(--white-40); }
+
+    /* SNCF */
+    .sncf-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .sncf-card { background: var(--white-06); border: 1px solid var(--white-10); border-radius: var(--radius); overflow: hidden; }
+    .sncf-img-wrap { width: 100%; }
+    .sncf-img-wrap img { width: 100%; height: auto; display: block; }
+    .sncf-info { padding: 1.1rem 1.3rem; }
+    .sncf-meta { font-family: 'Space Mono', monospace; font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent-blue); margin-bottom: 0.3rem; }
+    .sncf-title { font-size: 0.92rem; font-weight: 600; color: var(--white); margin-bottom: 0.35rem; }
+    .sncf-desc { font-size: 0.8rem; color: var(--white-60); line-height: 1.6; }
+
+
+    /* ═══════════════════════════════════
+       ÉTUDES DE CAS
+    ═══════════════════════════════════ */
+    #etudes { }
+    #etudes .section-eyebrow { color: var(--accent-blue); }
+    #etudes .section-eyebrow::before { background: var(--accent-blue); }
+    #etudes .section-title { color: var(--white); }
+    #etudes .section-title em { color: var(--accent-blue); }
+    #etudes .section-desc { color: var(--white-60); }
+    .etudes-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.3rem; }
+    .etude-card { background: var(--white-06); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 1.6rem; box-shadow: 0 2px 16px rgba(0,0,0,0.2); display: flex; flex-direction: column; transition: box-shadow .2s, transform .2s; }
+    .etude-card:hover { box-shadow: 0 6px 28px rgba(0,0,0,0.35); transform: translateY(-2px); }
+    .etude-num { font-family: 'Space Mono', monospace; font-size: 0.63rem; letter-spacing: 0.15em; text-transform: uppercase; color: #f4a124; margin-bottom: 0.55rem; font-weight: 700; }
+    .etude-title { font-family: 'Playfair Display', serif; font-size: 1.02rem; font-weight: 700; color: var(--white); margin-bottom: 0.55rem; }
+    .etude-desc { font-size: 0.8rem; color: var(--white-60); line-height: 1.6; flex: 1; }
+    .etude-link { display: inline-flex; align-items: center; gap: 0.28rem; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-blue); font-weight: 700; text-decoration: none; margin-top: 1.1rem; transition: color .2s; }
+    .etude-link:hover { color: #f4a124; }
+    .etude-soon { background: var(--white-06); border: 2px dashed var(--white-20); }
+    .etude-soon .etude-title { color: var(--accent-blue); font-size: 1.1rem; }
+    .etude-soon .etude-desc { color: var(--white-60); }
+    .soon-link { display: inline-flex; align-items: center; gap: 0.28rem; font-family: 'Space Mono', monospace; font-size: 0.65rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--accent-blue); font-weight: 700; text-decoration: none; margin-top: 1.1rem; transition: color .2s; }
+    .soon-link:hover { color: #f4a124; }
+
+    /* ═══════════════════════════════════
+       CONTACT
+    ═══════════════════════════════════ */
+    #contact {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 64px 5rem;
+    }
+    .contact-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; width: 100%; align-items: center; }
+    .contact-eyebrow { display: flex; align-items: center; gap: 0.7rem; font-family: 'Space Mono', monospace; font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--white-40); margin-bottom: 1.4rem; }
+    .contact-eyebrow::before { content: ''; display: inline-block; width: 2rem; height: 1.5px; background: var(--white-30,rgba(255,255,255,0.3)); }
+    .contact-big { font-family: 'Playfair Display', serif; font-weight: 900; line-height: 1.05; color: var(--white); font-size: clamp(2.4rem, 4vw, 3.8rem); margin-bottom: 1.5rem; white-space: nowrap; }
+    .contact-big em { font-style: italic; }
+    .contact-big .blue { color: var(--accent-blue); }
+    .contact-sub { font-size: 0.88rem; color: var(--white-60); line-height: 1.65; max-width: 380px; margin-bottom: 2rem; }
+    .contact-dispo { display: inline-flex; align-items: center; gap: 0.6rem; padding: 0.65rem 1.2rem; background: var(--green-bg); border: 1px solid rgba(61,214,140,0.25); border-radius: 8px; font-size: 0.84rem; color: var(--green); font-weight: 500; }
+    .cdot { width: 8px; height: 8px; border-radius: 50%; background: var(--green); box-shadow: 0 0 0 3px rgba(61,214,140,0.25); flex-shrink: 0; }
+    /* Grille 2×2 : Email|LinkedIn / Téléphone|CV – identique à la photo */
+    .contact-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 0.85rem; }
+    .contact-card { display: flex; align-items: center; gap: 1rem; background: var(--navy-input); border: 1px solid var(--white-10); border-radius: var(--radius); padding: 1.05rem 1.3rem; text-decoration: none; transition: background .2s, border-color .2s; }
+    .contact-card:hover { background: rgba(35,55,170,0.9); border-color: var(--white-20); }
+    .cc-icon { width: 38px; height: 38px; border-radius: 10px; background: var(--white-10); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .cc-icon svg { width: 17px; height: 17px; color: var(--white-60); }
+    .cc-body { flex: 1; min-width: 0; }
+    .cc-label { font-size: 0.62rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--white-40); margin-bottom: 0.22rem; }
+    .cc-value { font-size: 0.93rem; font-weight: 500; color: var(--white); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--navy-deep); padding: 1.5rem 5rem; display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--white-10); }
+    footer p { font-size: 0.73rem; color: var(--white-40); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 1100px) {
+      .accueil-inner { grid-template-columns: 1fr; }
+      .hero-card { max-width: 460px; }
+      .contact-inner { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    @media (max-width: 900px) {
+      nav { padding: 0 1.5rem; }
+      .nav-links { display: none; flex-direction: column; position: absolute; top: 64px; left: 0; right: 0; background: rgba(9,20,84,0.97); padding: 0.5rem 1.5rem; }
+      .nav-links.open { display: flex; }
+      .nav-links a { line-height: 3rem; border-bottom: 1px solid var(--white-10); }
+      .burger { display: flex; }
+      #accueil, #contact { padding-left: 1.5rem; padding-right: 1.5rem; }
+      .section-wrap { padding: 3rem 1.5rem; }
+      .ap-layout { grid-template-columns: 1fr; }
+      .ap-left-col { gap: 1rem; }
+      .ap-grid { grid-template-columns: 1fr; }
+      .etudes-grid { grid-template-columns: repeat(2,1fr); }
+      .sncf-grid { grid-template-columns: 1fr; }
+      footer { padding: 1.5rem; flex-direction: column; gap: 0.5rem; text-align: center; }
+    }
+    @media (max-width: 640px) {
+      .etudes-grid { grid-template-columns: 1fr; }
+      .phone-card { width: 100%; max-width: 280px; }
+      .mim-wrap { flex-direction: column; align-items: center; }
+      .mim-card { width: 100%; max-width: 280px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ══ NAV ══ -->
+<nav id="mainNav">
+  <a href="#accueil" class="nav-logo">Sympa L.</a>
+  <ul class="nav-links" id="navLinks">
+    <li><a href="#accueil">Accueil</a></li>
+    <li><a href="#apropos">À propos</a></li>
+    <li><a href="#experiences">Expériences</a></li>
+    <li><a href="#realisations">Réalisations</a></li>
+    <li><a href="#etudes">Études de cas</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="burger" id="burger" onclick="toggleMenu()" aria-label="Menu">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+
+<!-- ══════════════ ACCUEIL ══════════════ -->
+<section id="accueil">
+  <div class="accueil-inner">
+    <div>
+      <div class="hero-eyebrow">Portfolio</div>
+      <h1 class="hero-name">
+        <span class="first">Sympa</span>
+        <span class="last">LUTONADIO</span>
+      </h1>
+      <p class="hero-sub1">Stratégie, Marketing et Communication</p>
+      <p class="hero-sub2">Spécialiste en communication digitale, social media et content marketing.</p>
+      <div class="hero-tags">
+        <span class="hero-tag">Social Media</span>
+        <span class="hero-tag">Content Marketing</span>
+        <span class="hero-tag">SEO 360°</span>
+        <span class="hero-tag">Data Strategy</span>
+        <span class="hero-tag">Brand Storytelling</span>
+      </div>
+      <a href="#apropos" class="btn-primary">EN SAVOIR +</a>
+    </div>
+
+    <div class="hero-card">
+      <div class="hcr">
+        <span class="hcr-label">Localisation</span>
+        <span class="hcr-val">Paris, Île-de-France</span>
+      </div>
+      <div class="hcr">
+        <span class="hcr-label">Formation</span>
+        <span class="hcr-val">Stratégie, Marketing et Communication</span>
+      </div>
+      <div class="hcr">
+        <span class="hcr-label">Expérience</span>
+        <span class="hcr-val">+ 3 ans</span>
+      </div>
+      <div class="hcr">
+        <span class="hcr-label">Téléphone</span>
+        <span class="hcr-val">06.58.33.31.94</span>
+      </div>
+      <div class="hcr">
+        <span class="hcr-label">E-mail</span>
+        <span class="hcr-val"><a id="mail-hero" href="#" style="color:inherit;text-decoration:none;transition:color .2s;" onmouseover="this.style.color='#7098e8'" onmouseout="this.style.color='inherit'">s.lutonadio<!---->@<!---->live.fr</a></span>
+      </div>
+      <div class="dispo-badge">
+        <div class="dispo-dot"></div>
+        Disponible immédiatement
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ À PROPOS ══════════════ -->
+<section id="apropos">
+  <div class="section-wrap">
+    <div class="section-eyebrow">À propos</div>
+    <h2 class="section-title">Profil et <em>formation</em></h2>
+    <p class="section-desc">Spécialisée en stratégie marketing, communication digitale et gestion de marque.</p>
+
+    <!-- Layout maquette : col gauche (bio + formation + intérêts) | col droite (compétences + outils + langues) -->
+    <div class="ap-layout">
+
+      <!-- COL GAUCHE -->
+      <div class="ap-left-col">
+
+        <!-- Texte bio -->
+        <div class="ap-bio">
+          <p>Diplômé d'un Master en Stratégie Marketing et Communication à l'ECS Paris, j'ai travaillé chez Orange et SNCF Réseau sur la création de contenus, l'optimisation SEO et la gestion de communautés.</p>
+          <p style="margin-top:1rem;">En parallèle, je pilote la stratégie digitale et le branding de Mimonisa, un projet musical pour les artistes émérgeants.</p>
+        </div>
+
+        <!-- Formation -->
+        <div class="ap-card ap-formation">
+          <div class="ap-card-lbl">Formation</div>
+          <div class="f-item">
+            <div class="f-school">ECS Paris, Paris 16</div>
+            <div class="f-degree">Master Stratégie Marketing et Communication</div>
+            <div class="f-sub">Titre RNCP Niveau 7 : Manager des stratégies marketing et communication</div>
+          </div>
+          <div class="f-item">
+            <div class="f-school">Collège de Paris, Puteaux, 92</div>
+            <div class="f-degree">Bachelor Marketing Digital et Social Média</div>
+          </div>
+          <div class="f-item">
+            <div class="f-school">Université Paris-Est Créteil (UPEC), Créteil 94</div>
+            <div class="f-degree">L1 Lettres parcours Communication</div>
+          </div>
+        </div>
+
+        <!-- Centres d'intérêt -->
+        <div class="ap-card">
+          <div class="ap-card-lbl">Centres d'intérêt</div>
+          <div class="int-wrap" style="margin-top:0;">
+            <span class="int-pill">🎸 Guitare</span>
+            <span class="int-pill">⚽ Football</span>
+            <span class="int-pill">✈️ Voyages</span>
+            <span class="int-pill">🎵 Musique</span>
+            <span class="int-pill">🎭 Culture</span>
+          </div>
+        </div>
+
+      </div><!-- /ap-left-col -->
+
+      <!-- COL DROITE : 3 cartes empilées -->
+      <div class="ap-right">
+
+        <!-- Compétences clés -->
+        <div class="ap-card">
+          <div class="ap-card-lbl">Compétences clés</div>
+          <div class="comp-tags-wrap">
+            <span class="comp-pill">Social Media Management</span>
+            <span class="comp-pill">Contenu de stratégie</span>
+            <span class="comp-pill">SEO 360°</span>
+            <span class="comp-pill">Reporting KPI</span>
+            <span class="comp-pill">Analyse de données</span>
+            <span class="comp-pill">Suivi de performances</span>
+            <span class="comp-pill">Data Strategy</span>
+            <span class="comp-pill">Création de contenu</span>
+            <span class="comp-pill">Gestion de site web</span>
+            <span class="comp-pill">Vidéo et montage</span>
+          </div>
+        </div>
+
+        <!-- Outils -->
+        <div class="ap-card">
+          <div class="ap-card-lbl">Outils</div>
+          <div class="outils-wrap">
+            <span class="outil-tag">Premiere Pro</span>
+            <span class="outil-tag">CapCut</span>
+            <span class="outil-tag">Canva</span>
+            <span class="outil-tag">PlayPlay</span>
+            <span class="outil-tag">GA4</span>
+            <span class="outil-tag">Search Console</span>
+            <span class="outil-tag">HypeAuditor</span>
+            <span class="outil-tag">Talkwalker</span>
+            <span class="outil-tag">WordPress</span>
+            <span class="outil-tag">Elementor</span>
+            <span class="outil-tag">Microsoft Office</span>
+            <span class="outil-tag">Google Workspace</span>
+            <span class="outil-tag">Microsoft Teams</span>
+            <span class="outil-tag">Notion</span>
+          </div>
+        </div>
+
+        <!-- Langues -->
+        <div class="ap-card">
+          <div class="ap-card-lbl">Langues</div>
+          <div class="lang-row"><span class="lang-name">🇫🇷 Français</span><span class="lang-lvl">Natif</span></div>
+          <div class="lang-row"><span class="lang-name">🇬🇧 Anglais</span><span class="lang-lvl">B1</span></div>
+          <div class="lang-row"><span class="lang-name">🇨🇩 Lingala</span><span class="lang-lvl">Bilingue</span></div>
+        </div>
+
+      </div><!-- /ap-right -->
+    </div><!-- /ap-layout -->
+  </div>
+</section>
+
+
+<!-- ══════════════ EXPÉRIENCES ══════════════ -->
+<section id="experiences">
+  <div class="section-wrap">
+    <div class="section-eyebrow">Expériences</div>
+    <h2 class="section-title">Parcours <em>professionnel</em></h2>
+    <p class="section-desc">Expériences en communication digitale, social media et stratégie de contenu.</p>
+
+    <div class="exp-list">
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-co">Mimonisa (Bénévolat)</div><div class="exp-role">Social Media et Brand Content Manager 360°</div></div>
+          <span class="exp-period">Mai 2025 – Présent</span>
+        </div>
+        <div class="exp-tags"><span class="exp-tag">Social Media</span><span class="exp-tag">Identité visuelle</span><span class="exp-tag">Brand Storytelling</span></div>
+        <p class="exp-desc">Pilotage de l'intégralité de l'univers digital du projet : stratégie de contenu, direction artistique, planification éditoriale sur Instagram, TikTok, LinkedIn et YouTube. Positionnement de marque et identité visuelle.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-co">Orange</div><div class="exp-role">Chargé de communication digitale et Community Manager</div></div>
+          <span class="exp-period">Sept. 2022 – Sept. 2024</span>
+        </div>
+        <div class="exp-tags"><span class="exp-tag">SEO</span><span class="exp-tag">Content Marketing</span><span class="exp-tag">Social Media</span></div>
+        <p class="exp-desc">Optimisation SEO des articles de reseaux.orange.fr. Gestion du compte Instagram @Orange_france (83k abonnés). Création de tutoriels vidéo pédagogiques. Social listening et gestion de crise.</p>
+        <a class="btn-rapport" href="https://www.canva.com/design/DAGFY7jrz2I/HkI6q0jI7YgdHfnHtIzGHw/view?utm_content=DAGFY7jrz2I&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h2d592a5ea2" target="_blank" rel="noopener">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Voir mon rapport d'expérience
+        </a>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-co">SNCF Réseau</div><div class="exp-role">Chargé de communication digitale et service client</div></div>
+          <span class="exp-period">Oct. 2021 – Sept. 2022</span>
+        </div>
+        <div class="exp-tags"><span class="exp-tag">Communication interne</span><span class="exp-tag">Vidéo</span><span class="exp-tag">Newsletter</span></div>
+        <p class="exp-desc">Veille et modération des réseaux internes (Yammer, intranet). Réalisation de contenus vidéo, interviews et newsletters internes. Support au lancement de l'app Culture Client.</p>
+      </div>
+
+      <div class="exp-card">
+        <div class="exp-top">
+          <div><div class="exp-co">Coseka</div><div class="exp-role">Community Manager</div></div>
+          <span class="exp-period">Avr. 2021 – Juil. 2021</span>
+        </div>
+        <div class="exp-tags"><span class="exp-tag">Stratégie 360°</span><span class="exp-tag">Instagram</span><span class="exp-tag">Événementiel</span></div>
+        <p class="exp-desc">Mise en place d'une stratégie de communication 360° avant l'EURO 2021. Animation Instagram @Team_Coseka (4,3k abonnés).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ RÉALISATIONS ══════════════ -->
+<section id="realisations">
+  <div class="section-wrap">
+    <div class="section-eyebrow">Réalisations</div>
+    <h2 class="section-title">Projets et <em>créations</em></h2>
+    <p class="section-desc">Une sélection de projets concrets réalisés en entreprise et en freelance.</p>
+
+    <!-- MIMONISA -->
+    <div class="real-block">
+      <h3 class="real-block-title">MIMONISA</h3>
+      <p class="real-block-sub">Un média dédié aux artistes émergents. Mise en ligne et diffusion de vidéos sur Instagram et YouTube pour accompagner le lancement du projet et renforcer sa visibilité en ligne.</p>
+
+      <div class="mim-wrap">
+        <div class="mim-card">
+          <div class="vp">
+            <video id="v-teas" preload="metadata" playsinline><source src="TEASING.mp4" type="video/mp4"></video>
+            <div class="vp-overlay" id="ov-teas" onclick="playVid('v-teas','ov-teas')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+          <div class="mim-info">
+            <div class="vid-brand">@mimonisa</div>
+            <div class="vid-title">MIMONISA - Teasing</div>
+            <a class="btn-ig" href="https://www.instagram.com/reel/DSSuGGWD7Jk/?igsh=MmFhOHVoNzEzN2Fh" target="_blank" rel="noopener">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none"/></svg>
+              Voir sur Instagram
+            </a>
+          </div>
+        </div>
+
+        <div class="mim-card">
+          <div class="vp">
+            <video id="v-lanc" preload="metadata" playsinline><source src="TEASING_TikTok_Insta.mp4" type="video/mp4"></video>
+            <div class="vp-overlay" id="ov-lanc" onclick="playVid('v-lanc','ov-lanc')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+          <div class="mim-info">
+            <div class="vid-brand">@mimonisa</div>
+            <div class="vid-title">MIMONISA - Lancement</div>
+            <a class="btn-yt" href="https://www.youtube.com/shorts/sQHQya9vueE" target="_blank" rel="noopener">
+              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M23.5 6.2a3 3 0 0 0-2.1-2.1C19.5 3.6 12 3.6 12 3.6s-7.5 0-9.4.5A3 3 0 0 0 .5 6.2C0 8.1 0 12 0 12s0 3.9.5 5.8a3 3 0 0 0 2.1 2.1c1.9.5 9.4.5 9.4.5s7.5 0 9.4-.5a3 3 0 0 0 2.1-2.1C24 15.9 24 12 24 12s0-3.9-.5-5.8zM9.7 15.5V8.5l6.3 3.5-6.3 3.5z"/></svg>
+              Voir sur YouTube
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div style="text-align:center; margin-top:1.4rem;">
+        <a class="btn-linktree" href="https://linktr.ee/mimonisa" target="_blank" rel="noopener">🌿 Linktree de Mimonisa</a>
+      </div>
+    </div>
+
+    <!-- ORANGE -->
+    <div class="real-block">
+      <h3 class="real-block-title">Orange : Tutoriels et contenus vidéo pédagogiques</h3>
+      <p class="real-block-sub">Création et publication de tutoriels vidéo pour le compte @Orange_France (83k abonnés) sur Instagram.</p>
+
+      <div class="phone-grid">
+        <!-- Flip 5 -->
+        <div class="phone-card">
+          <div class="phone-vid">
+            <video id="v-flip5" preload="metadata" playsinline><source src="orange_flip5.mp4" type="video/mp4"></video>
+            <div class="phone-overlay" id="ov-flip5" onclick="playVid('v-flip5','ov-flip5')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+              <div class="phone-label"><div class="tuto-badge">Tuto</div><div class="phone-title">Vidéo sur l'écran avant du Flip 5</div></div>
+            </div>
+          </div>
+          <div class="phone-bottom">
+            <span class="phone-name">Galaxy Z Flip5</span>
+            <a class="btn-ig" href="https://www.instagram.com/reel/C7Ob0YTp4pE/?igsh=aGprZm1zMm9zN3hp" target="_blank" rel="noopener" style="font-size:0.62rem;padding:0.25rem 0.55rem;">Voir</a>
+          </div>
+        </div>
+
+        <!-- Pixel 8 Retouche -->
+        <div class="phone-card">
+          <div class="phone-vid">
+            <video id="v-pret" preload="metadata" playsinline><source src="orange_pixel8_retouche.mp4" type="video/mp4"></video>
+            <div class="phone-overlay" id="ov-pret" onclick="playVid('v-pret','ov-pret')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+              <div class="phone-label"><div class="tuto-badge">Tuto</div><div class="phone-title">La gomme magique du Google Pixel 8</div></div>
+            </div>
+          </div>
+          <div class="phone-bottom">
+            <span class="phone-name">Google Pixel 8 IA Retouche</span>
+            <a class="btn-ig" href="https://www.instagram.com/reel/C3USrIkqFsX/?igsh=OW1pd2lsNHd4ZDUz" target="_blank" rel="noopener" style="font-size:0.62rem;padding:0.25rem 0.55rem;">Voir</a>
+          </div>
+        </div>
+
+        <!-- Pixel 8 Fonds IA -->
+        <div class="phone-card">
+          <div class="phone-vid">
+            <video id="v-pfonds" preload="metadata" playsinline><source src="orange_pixel8_fonds.mp4" type="video/mp4"></video>
+            <div class="phone-overlay" id="ov-pfonds" onclick="playVid('v-pfonds','ov-pfonds')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+              <div class="phone-label"><div class="tuto-badge">Tuto</div><div class="phone-title">Les fonds d'écran IA du Google Pixel 8</div></div>
+            </div>
+          </div>
+          <div class="phone-bottom">
+            <span class="phone-name">Pixel 8 fonds IA</span>
+            <a class="btn-ig" href="https://www.instagram.com/reel/C3jvcu2KZHq/?igsh=MXdicGJiYjMyZHgwZw%3D%3D" target="_blank" rel="noopener" style="font-size:0.62rem;padding:0.25rem 0.55rem;">Voir</a>
+          </div>
+        </div>
+
+        <!-- Bulle Orange -->
+        <div class="phone-card">
+          <div class="phone-vid">
+            <video id="v-bulle" preload="metadata" playsinline><source src="orange_bulle.mp4" type="video/mp4"></video>
+            <div class="phone-overlay" id="ov-bulle" onclick="playVid('v-bulle','ov-bulle')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+              <div class="phone-label"><div class="tuto-badge">Tuto</div><div class="phone-title">Bulle Expérience Orange</div></div>
+            </div>
+          </div>
+          <div class="phone-bottom">
+            <span class="phone-name">Bulle Expérience Orange</span>
+            <a class="btn-ig" href="https://www.instagram.com/reel/C2OxNLmqhNp/?igsh=MWxjN2sxdzNuMTM0ag%3D%3D" target="_blank" rel="noopener" style="font-size:0.62rem;padding:0.25rem 0.55rem;">Voir</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SNCF -->
+    <div class="real-block">
+      <h3 class="real-block-title">SNCF Réseau</h3>
+      <p class="real-block-sub">Communication interne : interview vidéo et affiche de lancement de l'app Culture Client.</p>
+
+      <div class="sncf-grid">
+
+        <!-- Vidéo interview -->
+        <div class="sncf-card">
+          <div class="sncf-info">
+            <div class="sncf-meta">SNCF · Communication Interne</div>
+            <div class="sncf-title">Interview vidéo : Le Grand Tour</div>
+            <p class="sncf-desc">Réalisation complète : préparation, captation, montage via PlayPlay et publication sur l'intranet pour un contenu clair et engageant avec Jean-François (DGCS).</p>
+          </div>
+          <div class="vp-16-9">
+            <video id="v-intw" preload="metadata" playsinline><source src="interview-jean-francois-1.mp4" type="video/mp4"></video>
+            <div class="vp-overlay" id="ov-intw" onclick="playVid('v-intw','ov-intw')">
+              <div class="play-btn"><svg viewBox="0 0 24 24" fill="#0f1f6b"><polygon points="5,3 19,12 5,21"/></svg></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Affiche -->
+        <div class="sncf-card">
+          <div class="sncf-info">
+            <div class="sncf-meta">SNCF · Lancement Application</div>
+            <div class="sncf-title">Affiche : App Culture Client</div>
+          </div>
+          <div class="sncf-img-wrap">
+            <img src="IMG_1606.jpg" alt="Affiche App Culture Client" style="max-width:320px; margin:0 auto; display:block;" />
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════ ÉTUDES DE CAS ══════════════ -->
+<section id="etudes">
+  <div class="section-wrap">
+    <div class="section-eyebrow">Études de cas</div>
+    <h2 class="section-title">Analyses et <em>stratégies</em></h2>
+    <p class="section-desc">Des études approfondies menées sur des marques réelles.</p>
+
+    <div class="etudes-grid">
+      <div class="etude-card">
+        <div class="etude-num">ÉTUDE · 01</div>
+        <div class="etude-title">Stratégie Instagram : Kulturr</div>
+        <p class="etude-desc">Recommandations pour développer la communauté Instagram d'un artiste, avec des stratégies adaptées au secteur musical.</p>
+        <a class="etude-link" href="https://www.canva.com/design/DAG8Wc8KaKs/wBH9Bs6J_zH2zR3DQuf_wg/view" target="_blank" rel="noopener">VOIR L'ANALYSE →</a>
+      </div>
+      <div class="etude-card">
+        <div class="etude-num">ÉTUDE · 02</div>
+        <div class="etude-title">SEO 360° : LOSC.fr</div>
+        <p class="etude-desc">Analyse complète de la stratégie de référencement de LOSC.fr, du contenu à la technique, sur tous les leviers SEO.</p>
+        <a class="etude-link" href="https://www.canva.com/design/DAHDabLbkLw/V0AB2vG7IDPP8gWHPn_kbA/view" target="_blank" rel="noopener">VOIR L'ANALYSE →</a>
+      </div>
+      <div class="etude-card">
+        <div class="etude-num">ÉTUDE · 03</div>
+        <div class="etude-title">Data Strategy : Unisport</div>
+        <p class="etude-desc">Identification de cas d'usage concrets des données pour optimiser la prise de décision et la performance opérationnelle.</p>
+        <a class="etude-link" href="https://www.canva.com/design/DAF5ff-31Lw/yeSFhr9E1rJwg-JBiv641w/view" target="_blank" rel="noopener">VOIR L'ANALYSE →</a>
+      </div>
+      <div class="etude-card">
+        <div class="etude-num">ÉTUDE · 04</div>
+        <div class="etude-title">Stratégie de com. : Bonton</div>
+        <p class="etude-desc">Stratégie de communication pour restaurer la confiance des parties prenantes et assurer la durabilité de la marque.</p>
+        <a class="etude-link" href="https://www.canva.com/design/DAHDi5_ZmDU/Tqa-f0qn2i1KyJWzW52wGA/view" target="_blank" rel="noopener">VOIR L'ANALYSE →</a>
+      </div>
+      <div class="etude-card">
+        <div class="etude-num">ARTICLE · 05</div>
+        <div class="etude-title">Rédaction : Musique congolaise et influence urbaine</div>
+        <p class="etude-desc">Article analysant l'influence de la musique congolaise dans le monde urbain et ses répercussions culturelles à l'international.</p>
+        <a class="etude-link" href="https://www.canva.com/design/DAHBNrKTBuI/T-CTaJLxjEJK__fVEl7NYg/view" target="_blank" rel="noopener">VOIR L'ARTICLE →</a>
+      </div>
+      <div class="etude-card etude-soon">
+        <div class="etude-num">BIENTÔT</div>
+        <div class="etude-title">Prochain projet</div>
+        <p class="etude-desc">Je suis disponible pour de nouveaux projets et collaborations.</p>
+        <a class="soon-link" href="#contact">ME SUIVRE →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════ CONTACT ══════════════ -->
+<section id="contact">
+  <div class="contact-inner">
+    <!-- LEFT -->
+    <div>
+      <div class="contact-eyebrow">Prenons contact</div>
+      <h2 class="contact-big">
+        <em>Travaillons</em> <span class="blue">ensemble</span>
+      </h2>
+      <p class="contact-sub">
+        Intéressé par mon profil ?<br>
+        Je suis disponible immédiatement et ouverte à toutes opportunités en marketing et communication.
+      </p>
+      <div class="contact-dispo">
+        <div class="cdot"></div>
+        Disponible immédiatement
+      </div>
+    </div>
+
+    <!-- RIGHT – grille 2×2 : Email | LinkedIn / Téléphone | CV -->
+    <div class="contact-cards">
+
+      <a class="contact-card" id="mail-contact" href="#">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">E-mail</div>
+          <div class="cc-value" id="mail-display">s.lutonadio<!---->@<!---->live.fr</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://www.linkedin.com/in/sympa-l/" target="_blank" rel="noopener">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">LinkedIn</div>
+          <div class="cc-value">Sympa L.</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="tel:+33658333194">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.63 3.38 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L7.91 8.82a16 16 0 0 0 6 6l.91-.91a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">Téléphone</div>
+          <div class="cc-value">06.58.33.31.94</div>
+        </div>
+      </a>
+
+      <a class="contact-card" href="https://www.canva.com/design/DAHDlrHQdSc/IG531BhIpoE98fmvFiyEjw/view?utm_content=DAHDlrHQdSc&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=h446cd7936a" target="_blank" rel="noopener">
+        <div class="cc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg>
+        </div>
+        <div class="cc-body">
+          <div class="cc-label">Voir mon CV</div>
+          <div class="cc-value">Curriculum Vitæ</div>
+        </div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sympa LUTONADIO - Tous droits réservés</p>
+  <p>PORTFOLIO | Sympa L.</p>
+</footer>
+
+
+<script>
+/* ── Email : reconstruit en JS pour éviter toute obfuscation ── */
+(function() {
+  var u = 's.lutonadio';
+  var d = 'live.fr';
+  var email = u + '@' + d;
+  var mailto = 'mailto:' + email;
+
+  /* Accueil – lien + texte */
+  var heroLink = document.getElementById('mail-hero');
+  if (heroLink) {
+    heroLink.href = mailto;
+    heroLink.textContent = email;
+  }
+
+  /* Contact – lien + texte */
+  var contactLink = document.getElementById('mail-contact');
+  if (contactLink) {
+    contactLink.href = mailto;
+  }
+  var contactDisplay = document.getElementById('mail-display');
+  if (contactDisplay) {
+    contactDisplay.textContent = email;
+  }
+})();
+
+/* ── Scroll spy ── */
+var sections = document.querySelectorAll('section[id]');
+var navAs    = document.querySelectorAll('.nav-links a');
+window.addEventListener('scroll', function() {
+  var cur = '';
+  sections.forEach(function(s) { if (s.getBoundingClientRect().top <= 80) cur = s.id; });
+  navAs.forEach(function(a) { a.classList.toggle('active', a.getAttribute('href') === '#' + cur); });
+}, { passive: true });
+
+/* ── Mobile menu ── */
+function toggleMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+navAs.forEach(function(a) {
+  a.addEventListener('click', function() {
+    document.getElementById('navLinks').classList.remove('open');
+  });
+});
+
+/* ── Video player ── */
+function playVid(vid, ov) {
+  var v = document.getElementById(vid);
+  var o = document.getElementById(ov);
+  if (!v || !o) return;
+  o.style.display = 'none';
+  v.controls = true;
+  v.play().catch(function() {});
+  function restore() {
+    o.style.display = 'flex';
+    v.controls = false;
+  }
+  v.addEventListener('pause', restore, { once: true });
+  v.addEventListener('ended', restore, { once: true });
+}
+</script>
+</body>
+</html>
